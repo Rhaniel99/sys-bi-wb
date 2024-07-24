@@ -1,5 +1,6 @@
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
+import '../css/app.css'; // Importa o CSS do Tailwind
 
 createInertiaApp({
   resolve: name => {

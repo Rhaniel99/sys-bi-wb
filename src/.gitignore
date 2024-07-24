@@ -21,4 +21,5 @@ yarn-error.log
 /minio_data
 
 /composer.lock
-/ssl/
+/ssl/rr
+.rr.yaml

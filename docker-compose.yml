@@ -26,9 +26,9 @@ services:
   pgsql:
     image: postgres:12.17
     container_name: pgsql
-    # restart: unless-stopped
+    restart: unless-stopped
     tty: true
-    restart: always
+    # restart: always
     ports:
       - "5432:5432"
     volumes:
@@ -58,6 +58,8 @@ services:
       - .env:/var/www/html/.env
     networks:
       - laravel
+    environment:
+      - OCTANE_SERVER=roadrunner
 
   composer:
     build:
@@ -76,7 +78,7 @@ services:
       - php
     user: ${USER:-laravel} #system user
     profiles: ["composer"]
-    entrypoint: ['composer', '--ignore-platform-reqs']
+    entrypoint: ['composer']
     networks:
       - laravel
 
@@ -100,9 +102,9 @@ services:
     networks:
       - laravel
 
-  npm:
-    image: node:alpine
-    container_name: npm
+  node:
+    image: node:22-alpine
+    container_name: node
     volumes:
       - ./src:/var/www/html
       - .env:/var/www/html/.env
@@ -110,7 +112,6 @@ services:
       - 3000:3000
       - 3001:3001
     working_dir: /var/www/html
-    profiles: ["npm"]
-    entrypoint: ['npm']
+    profiles: ["node"]
     networks:
       - laravel

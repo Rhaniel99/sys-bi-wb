@@ -23,7 +23,9 @@ RUN echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
 
 # Installing php extensions
 RUN apk update && apk upgrade
-RUN apk add --no-cache postgresql-dev
-RUN docker-php-ext-install pdo pdo_pgsql bcmath
+
+RUN apk add --no-cache postgresql-dev 
+
+RUN docker-php-ext-install pdo pdo_pgsql bcmath 
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
